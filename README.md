@@ -7,6 +7,7 @@
 * [Longest](#longest)
 * [Sum](#sum)
 * [Expression](#expression)
+* [Quicksort](#quicksort)
 
 ## Factorial
 
@@ -483,6 +484,150 @@ public class Main {
         @Override
         public String toString() {
             return "(" + left + " " + op + " " + right + ")";
+        }
+    }
+}
+```
+
+## Quicksort
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant quicksort1 as quicksort
+    participant partition1 as partition
+    participant quicksort2 as quicksort
+    participant partition2 as partition
+    participant quicksort3 as quicksort
+    participant partition3 as partition
+    
+    main->>+quicksort1: [8, 7, 2, 1, 0, 5, 9, 6]
+    quicksort1->>+partition1: [8, 7, 2, 1, 0, 5, 9, 6]
+    partition1-->>-quicksort1: [2, 1, 0, 5, 6, 7, 9, 8]
+    quicksort1->>+quicksort2: [2, 1, 0, 5]
+    quicksort2->>+partition2: [2, 1, 0, 5]
+    partition2-->>-quicksort2: [2, 1, 0, 5]
+    quicksort2->>+quicksort3: [2, 1, 0]
+    quicksort3->>+partition3: [2, 1, 0]
+    partition3-->>-quicksort3: [0, 1, 2]
+    quicksort3->>+quicksort4: [1, 2]
+    quicksort4->>+partition4: [1, 2]
+    partition4-->>-quicksort4: [1, 2]
+    quicksort4-->>-quicksort3: [1, 2]
+    quicksort3-->>-quicksort2: [0, 1, 2]
+    quicksort2-->>-quicksort1: [0, 1, 2, 5]
+    quicksort1->>+quicksort2: [7, 9, 8]
+    quicksort2->>+partition2: [7, 9, 8]
+    partition2-->>-quicksort2: [7, 8, 9]
+    quicksort2-->>-quicksort1: [7, 8, 9]
+    quicksort1-->>-main: [0, 1, 2, 5, 6, 7, 8, 9]
+```
+
+### Python [:arrow_forward:](https://pythontutor.com/visualize.html#code=def%20partition%28array,%20low,%20high%29%3A%0A%20%20%20%20%23%20choose%20the%20rightmost%20element%20as%20pivot%0A%20%20%20%20pivot%20%3D%20array%5Bhigh%5D%0A%0A%20%20%20%20%23%20pointer%20for%20greater%20element%0A%20%20%20%20i%20%3D%20low%20-%201%0A%0A%20%20%20%20%23%20traverse%20through%20all%20elements%0A%20%20%20%20%23%20compare%20each%20element%20with%20pivot%0A%20%20%20%20for%20j%20in%20range%28low,%20high%29%3A%0A%20%20%20%20%20%20%20%20if%20array%5Bj%5D%20%3C%3D%20pivot%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20if%20element%20smaller%20than%20pivot%20is%20found%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20swap%20it%20with%20the%20greater%20element%20pointed%20by%20i%0A%20%20%20%20%20%20%20%20%20%20%20%20i%20%3D%20i%20%2B%201%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20swapping%20element%20at%20i%20with%20element%20at%20j%0A%20%20%20%20%20%20%20%20%20%20%20%20%28array%5Bi%5D,%20array%5Bj%5D%29%20%3D%20%28array%5Bj%5D,%20array%5Bi%5D%29%0A%0A%20%20%20%20%23%20swap%20the%20pivot%20element%20with%20the%20greater%20element%20specified%20by%20i%0A%20%20%20%20%28array%5Bi%20%2B%201%5D,%20array%5Bhigh%5D%29%20%3D%20%28array%5Bhigh%5D,%20array%5Bi%20%2B%201%5D%29%0A%0A%20%20%20%20%23%20return%20the%20position%20from%20where%20partition%20is%20done%0A%20%20%20%20return%20i%20%2B%201%0A%0A%0Adef%20quickSort%28array,%20low,%20high%29%3A%0A%20%20%20%20if%20low%20%3C%20high%3A%0A%20%20%20%20%20%20%20%20%23%20find%20pivot%20element%20such%20that%0A%20%20%20%20%20%20%20%20%23%20element%20smaller%20than%20pivot%20are%20on%20the%20left%0A%20%20%20%20%20%20%20%20%23%20element%20greater%20than%20pivot%20are%20on%20the%20right%0A%20%20%20%20%20%20%20%20pi%20%3D%20partition%28array,%20low,%20high%29%0A%0A%20%20%20%20%20%20%20%20%23%20recursive%20call%20on%20the%20left%20of%20pivot%0A%20%20%20%20%20%20%20%20quickSort%28array,%20low,%20pi%20-%201%29%0A%0A%20%20%20%20%20%20%20%20%23%20recursive%20call%20on%20the%20right%20of%20pivot%0A%20%20%20%20%20%20%20%20quickSort%28array,%20pi%20%2B%201,%20high%29%0A%0A%0Adata%20%3D%20%5B8,%207,%202,%201,%200,%205,%209,%206%5D%0Aprint%28%22Unsorted%3A%22,%20data%29%0AquickSort%28data,%200,%20len%28data%29%20-%201%29%0Aprint%28%22Sorted%3A%20%20%22,%20data%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```python
+def partition(array, low, high):
+    # choose the rightmost element as pivot
+    pivot = array[high]
+
+    # pointer for greater element
+    i = low - 1
+
+    # traverse through all elements
+    # compare each element with pivot
+    for j in range(low, high):
+        if array[j] <= pivot:
+            # if element smaller than pivot is found
+            # swap it with the greater element pointed by i
+            i = i + 1
+
+            # swapping element at i with element at j
+            (array[i], array[j]) = (array[j], array[i])
+
+    # swap the pivot element with the greater element specified by i
+    (array[i + 1], array[high]) = (array[high], array[i + 1])
+
+    # return the position from where partition is done
+    return i + 1
+
+def quickSort(array, low, high):
+    if low < high:
+        # find pivot element such that
+        # element smaller than pivot are on the left
+        # element greater than pivot are on the right
+        pi = partition(array, low, high)
+
+        # recursive call on the left of pivot
+        quickSort(array, low, pi - 1)
+
+        # recursive call on the right of pivot
+        quickSort(array, pi + 1, high)
+
+data = [8, 7, 2, 1, 0, 5, 9, 6]
+print("Unsorted:", data)
+quickSort(data, 0, len(data) - 1)
+print("Sorted:  ", data)
+```
+
+### Java [:arrow_forward:](https://pythontutor.com/visualize.html#code=import%20java.util.Arrays%3B%0A%0Apublic%20class%20Main%20%7B%0A%20%20%20%20public%20static%20void%20main%28String%20args%5B%5D%29%20%7B%0A%20%20%20%20%20%20%20%20int%5B%5D%20data%20%3D%20%7B8,%207,%202,%201,%200,%205,%209,%206%7D%3B%0A%20%20%20%20%20%20%20%20System.out.println%28%22Unsorted%3A%20%22%20%2B%20Arrays.toString%28data%29%29%3B%0A%20%20%20%20%20%20%20%20quickSort%28data,%200,%20data.length%20-%201%29%3B%0A%20%20%20%20%20%20%20%20System.out.println%28%22Sorted%3A%20%20%20%22%20%2B%20Arrays.toString%28data%29%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20//%20method%20to%20find%20the%20partition%20position%0A%20%20%20%20static%20int%20partition%28int%20array%5B%5D,%20int%20low,%20int%20high%29%20%7B%0A%20%20%20%20%20%20%20%20//%20choose%20the%20rightmost%20element%20as%20pivot%0A%20%20%20%20%20%20%20%20int%20pivot%20%3D%20array%5Bhigh%5D%3B%0A%0A%20%20%20%20%20%20%20%20//%20pointer%20for%20greater%20element%0A%20%20%20%20%20%20%20%20int%20i%20%3D%20%28low%20-%201%29%3B%0A%0A%20%20%20%20%20%20%20%20//%20traverse%20through%20all%20elements%0A%20%20%20%20%20%20%20%20//%20compare%20each%20element%20with%20pivot%0A%20%20%20%20%20%20%20%20for%20%28int%20j%20%3D%20low%3B%20j%20%3C%20high%3B%20j%2B%2B%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28array%5Bj%5D%20%3C%3D%20pivot%29%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20if%20element%20smaller%20than%20pivot%20is%20found%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20swap%20it%20with%20the%20greatr%20element%20pointed%20by%20i%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20i%2B%2B%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20swapping%20element%20at%20i%20with%20element%20at%20j%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20int%20temp%20%3D%20array%5Bi%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20array%5Bi%5D%20%3D%20array%5Bj%5D%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20array%5Bj%5D%20%3D%20temp%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20//%20swapt%20the%20pivot%20element%20with%20the%20greater%20element%20specified%20by%20i%0A%20%20%20%20%20%20%20%20int%20temp%20%3D%20array%5Bi%20%2B%201%5D%3B%0A%20%20%20%20%20%20%20%20array%5Bi%20%2B%201%5D%20%3D%20array%5Bhigh%5D%3B%0A%20%20%20%20%20%20%20%20array%5Bhigh%5D%20%3D%20temp%3B%0A%0A%20%20%20%20%20%20%20%20//%20return%20the%20position%20from%20where%20partition%20is%20done%0A%20%20%20%20%20%20%20%20return%20%28i%20%2B%201%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20static%20void%20quickSort%28int%20array%5B%5D,%20int%20low,%20int%20high%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28low%20%3C%20high%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20find%20pivot%20element%20such%20that%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20elements%20smaller%20than%20pivot%20are%20on%20the%20left%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20elements%20greater%20than%20pivot%20are%20on%20the%20right%0A%20%20%20%20%20%20%20%20%20%20%20%20int%20pi%20%3D%20partition%28array,%20low,%20high%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20recursive%20call%20on%20the%20left%20of%20pivot%0A%20%20%20%20%20%20%20%20%20%20%20%20quickSort%28array,%20low,%20pi%20-%201%29%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20//%20recursive%20call%20on%20the%20right%20of%20pivot%0A%20%20%20%20%20%20%20%20%20%20%20%20quickSort%28array,%20pi%20%2B%201,%20high%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=java&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```java
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String args[]) {
+        int[] data = {8, 7, 2, 1, 0, 5, 9, 6};
+        System.out.println("Unsorted: " + Arrays.toString(data));
+        quickSort(data, 0, data.length - 1);
+        System.out.println("Sorted:   " + Arrays.toString(data));
+    }
+
+    // method to find the partition position
+    static int partition(int array[], int low, int high) {
+        // choose the rightmost element as pivot
+        int pivot = array[high];
+
+        // pointer for greater element
+        int i = (low - 1);
+
+        // traverse through all elements
+        // compare each element with pivot
+        for (int j = low; j < high; j++) {
+            if (array[j] <= pivot) {
+
+                // if element smaller than pivot is found
+                // swap it with the greatr element pointed by i
+                i++;
+
+                // swapping element at i with element at j
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+
+        }
+
+        // swapt the pivot element with the greater element specified by i
+        int temp = array[i + 1];
+        array[i + 1] = array[high];
+        array[high] = temp;
+
+        // return the position from where partition is done
+        return (i + 1);
+    }
+
+    static void quickSort(int array[], int low, int high) {
+        if (low < high) {
+            // find pivot element such that
+            // elements smaller than pivot are on the left
+            // elements greater than pivot are on the right
+            int pi = partition(array, low, high);
+
+            // recursive call on the left of pivot
+            quickSort(array, low, pi - 1);
+
+            // recursive call on the right of pivot
+            quickSort(array, pi + 1, high);
         }
     }
 }
