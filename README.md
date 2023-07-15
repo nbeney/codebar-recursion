@@ -102,3 +102,54 @@ public class Reverse {
   }
 }
 ```
+
+## Convert
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant convert4 as convert
+    participant convert3 as convert
+    participant convert2 as convert
+    participant convert1 as convert
+
+    main->>+convert4: 1234
+        convert4->>+convert3: 123
+            convert3->>+convert2: 12
+                convert2->>+convert1: 1
+                convert1-->>-convert2: "1"
+            convert2->>-convert3: "12" = "1" + "2"
+        convert3-->>-convert4: "123" = "12" + "3"
+    convert4-->>-main: "1234" = "123" + "4"
+```
+
+### Python
+
+```python
+def convert(number: int) -> str:
+  if number < 10:
+    return str(number)
+  else:
+    return convert(number // 10) + str(number % 10)
+
+print(convert(1234))
+```
+
+### Java
+
+```java
+public class Convert {
+  public static void main(String[] args) {
+    System.out.println(convert(1234));
+  }
+
+  public static String convert(int number) {
+    if (number < 10) {
+      return "0123456789".charAt(number) + "";
+    } else {
+      return convert(number / 10) + (number % 10);
+    }
+  }
+}
+```
+
