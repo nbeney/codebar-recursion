@@ -12,6 +12,8 @@
 
 ## Graphics
 
+<img src="./circles.png" alt="Circles" width="200" height="200"/>
+
 ```mermaid
 sequenceDiagram
     participant main
