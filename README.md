@@ -351,17 +351,17 @@ sequenceDiagram
     participant evaluate3 as evaluate
     participant evaluate4 as evaluate
 
-    main->>+evaluate1: ((10 + 20) * (30 - (40 / 2)))
-        evaluate1->>+evaluate2: (10 + 20)
+    main->>+evaluate1: (10 + 20) * (30 - (40 / 2))
+        evaluate1->>+evaluate2: 10 + 20
             evaluate2->>+evaluate3: 10
             evaluate3-->>-evaluate2: 10
             evaluate2->>+evaluate3: 20
             evaluate3-->>-evaluate2: 20
         evaluate2-->>-evaluate1: 30
-        evaluate1->>+evaluate2: (30 - (40 / 2))
+        evaluate1->>+evaluate2: 30 - (40 / 2)
             evaluate2->>+evaluate3: 30
             evaluate3-->>-evaluate2: 30
-            evaluate2->>+evaluate3: (40 / 2)
+            evaluate2->>+evaluate3: 40 / 2
                 evaluate3->>+evaluate4: 40
                 evaluate4-->>-evaluate3: 40
                 evaluate3->>+evaluate4: 2
