@@ -500,26 +500,30 @@ sequenceDiagram
     participant partition2 as partition
     participant quicksort3 as quicksort
     participant partition3 as partition
-    
+
     main->>+quicksort1: [8, 7, 2, 1, 0, 5, 9, 6]
-    quicksort1->>+partition1: [8, 7, 2, 1, 0, 5, 9, 6]
-    partition1-->>-quicksort1: [2, 1, 0, 5, 6, 7, 9, 8]
-    quicksort1->>+quicksort2: [2, 1, 0, 5]
-    quicksort2->>+partition2: [2, 1, 0, 5]
-    partition2-->>-quicksort2: [2, 1, 0, 5]
-    quicksort2->>+quicksort3: [2, 1, 0]
-    quicksort3->>+partition3: [2, 1, 0]
-    partition3-->>-quicksort3: [0, 1, 2]
-    quicksort3->>+quicksort4: [1, 2]
-    quicksort4->>+partition4: [1, 2]
-    partition4-->>-quicksort4: [1, 2]
-    quicksort4-->>-quicksort3: [1, 2]
-    quicksort3-->>-quicksort2: [0, 1, 2]
-    quicksort2-->>-quicksort1: [0, 1, 2, 5]
-    quicksort1->>+quicksort2: [7, 9, 8]
-    quicksort2->>+partition2: [7, 9, 8]
-    partition2-->>-quicksort2: [7, 8, 9]
-    quicksort2-->>-quicksort1: [7, 8, 9]
+        quicksort1->>+partition1: [8, 7, 2, 1, 0, 5, 9, 6]
+        partition1-->>-quicksort1: [2, 1, 0, 5, 6, 7, 9, 8]
+
+        quicksort1->>+quicksort2: [2, 1, 0, 5]
+            quicksort2->>+partition2: [2, 1, 0, 5]
+            partition2-->>-quicksort2: [2, 1, 0, 5]
+
+            quicksort2->>+quicksort3: [2, 1, 0]
+                quicksort3->>+partition3: [2, 1, 0]
+                partition3-->>-quicksort3: [0, 1, 2]
+
+                quicksort3->>+quicksort4: [1, 2]
+                    quicksort4->>+partition4: [1, 2]
+                    partition4-->>-quicksort4: [1, 2]
+                quicksort4-->>-quicksort3: [1, 2]
+            quicksort3-->>-quicksort2: [0, 1, 2]
+        quicksort2-->>-quicksort1: [0, 1, 2, 5]
+
+        quicksort1->>+quicksort2: [7, 9, 8]
+            quicksort2->>+partition2: [7, 9, 8]
+            partition2-->>-quicksort2: [7, 8, 9]
+        quicksort2-->>-quicksort1: [7, 8, 9]
     quicksort1-->>-main: [0, 1, 2, 5, 6, 7, 8, 9]
 ```
 
