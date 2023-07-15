@@ -4,6 +4,7 @@
 * [Reverse](#reverse)
 * [Convert](#convert)
 * [Fibonacci](#fibonacci)
+* [Longest](#longest)
 
 ## Factorial
 
@@ -217,6 +218,65 @@ public class Fibonacci {
       return n;
     } else {
       return fib(n - 2) + fib(n - 1);
+    }
+  }
+}
+```
+
+## Longest
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant longest1 as longest
+    participant longest2 as longest
+    participant longest3 as longest
+
+    main->+longest1: ["red", "green", "blue"]
+    longest1->+longest2: ["green", "blue"]
+    longest2->+longest3: ["blue"]
+    longest3-->-longest2: "blue"
+    longest2-->-longest1: "green" because "green" is longer than "blue"
+    longest1-->-main: "green" because "red" is not longer than "green"
+```
+
+### Python [:arrow_forward:](https://pythontutor.com/visualize.html#code=def%20longest%28words%3A%20list%29%20-%3E%20str%3A%0A%20%20%20%20if%20len%28words%29%20%3D%3D%201%3A%0A%20%20%20%20%20%20%20%20return%20words%5B0%5D%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20longest_of_rest%20%3D%20longest%28words%5B1%3A%5D%29%0A%20%20%20%20%20%20%20%20if%20len%28words%5B0%5D%29%20%3E%20len%28longest_of_rest%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20words%5B0%5D%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20longest_of_rest%0A%0Aprint%28longest%28%5B%22red%22,%20%22green%22,%20%22blue%22%5D%29%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```python
+def longest(words: list[str]) -> str:
+    if len(words) == 1:
+        return words[0]
+    else:
+        longest_of_rest = longest(words[1:])
+        if len(words[0]) > len(longest_of_rest):
+            return words[0]
+        else:
+            return longest_of_rest
+
+print(longest(["red", "green", "blue"]))
+```
+
+### Java [:arrow_forward:](https://pythontutor.com/visualize.html#code=import%20java.util.Arrays%3B%0A%0Apublic%20class%20Longest%20%7B%0A%20%20public%20static%20void%20main%28String%5B%5D%20args%29%20%7B%0A%20%20%20%20System.out.println%28longest%28new%20String%5B%5D%20%7B%22red%22,%20%22green%22,%20%22blue%22%7D%29%29%3B%0A%20%20%7D%0A%0A%20%20public%20static%20String%20longest%28String%5B%5D%20words%29%20%7B%0A%20%20%20%20if%20%28words.length%20%3D%3D%201%29%20%7B%0A%20%20%20%20%20%20return%20words%5B0%5D%3B%0A%20%20%20%20%7D%20else%7B%0A%20%20%20%20%20%20String%5B%5D%20rest%20%3D%20Arrays.copyOfRange%28words,%201,%20words.length%29%3B%0A%20%20%20%20%20%20String%20longestOfRest%20%3D%20longest%28rest%29%3B%0A%20%20%20%20%20%20if%20%28words%5B0%5D.length%28%29%20%3E%20longestOfRest.length%28%29%29%20%7B%0A%20%20%20%20%20%20%20%20return%20words%5B0%5D%3B%0A%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20return%20longestOfRest%3B%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=java&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```java
+import java.util.Arrays;
+
+public class Longest {
+  public static void main(String[] args) {
+    System.out.println(longest(new String[] {"red", "green", "blue"}));
+  }
+
+  public static String longest(String[] words) {
+    if (words.length == 1) {
+      return words[0];
+    } else {
+      String[] rest = Arrays.copyOfRange(words, 1, words.length);
+      String longestOfRest = longest(rest);
+      if (words[0].length() > longestOfRest.length()) {
+        return words[0];
+      } else {
+        return longestOfRest;
+      }
     }
   }
 }
