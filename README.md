@@ -376,10 +376,10 @@ sequenceDiagram
 ```python
 from typing import TypeVar
 
-TExpr = TypeVar("TExpr", bound="Expr")
+TExpr = TypeVar("TExpr", bound="Expr|int|float")
 
 class Expr:
-    def __init__(self, left: TExpr | int | float, op: str, right: TExpr | int | float):
+    def __init__(self, left: TExpr, op: str, right: TExpr):
         self.left = left
         self.op = op
         self.right = right
@@ -387,7 +387,7 @@ class Expr:
     def __str__(self):
         return f"({self.left} {self.op} {self.right})"
 
-def evaluate(expr: TExpr | int | float) -> float:
+def evaluate(expr: TExpr) -> float:
     if isinstance(expr, Expr):
         left_val = evaluate(expr.left)
         right_val = evaluate(expr.right)
