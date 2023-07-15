@@ -6,6 +6,7 @@
 * [Fibonacci](#fibonacci)
 * [Longest](#longest)
 * [Sum](#sum)
+* [Expression](#expression)
 
 ## Factorial
 
@@ -335,6 +336,152 @@ public class Main {
             Double first = numbers.get(0);
             List<Double> rest = numbers.subList(1, numbers.size());
             return first + sum(rest);
+        }
+    }
+}
+```
+
+## Expression
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant evaluate1 as evaluate
+    participant evaluate2 as evaluate
+    participant evaluate3 as evaluate
+    participant evaluate4 as evaluate
+
+    main->>+evaluate1: ((10 + 20) * (30 - (40 / 2)))
+        evaluate1->>+evaluate2: (10 + 20)
+            evaluate2->>+evaluate3: 10
+            evaluate3-->>-evaluate2: 10
+            evaluate2->>+evaluate3: 20
+            evaluate3-->>-evaluate2: 20
+        evaluate2-->>-evaluate1: 30
+        evaluate1->>+evaluate2: (30 - (40 / 2))
+            evaluate2->>+evaluate3: 30
+            evaluate3-->>-evaluate2: 30
+            evaluate2->>+evaluate3: (40 / 2)
+                evaluate3->>+evaluate4: 40
+                evaluate4-->>-evaluate3: 40
+                evaluate3->>+evaluate4: 2
+                evaluate4-->>-evaluate3: 2
+            evaluate3-->>-evaluate2: 20.0
+        evaluate2-->>-evaluate1: 10.0
+    evaluate1-->>-main: 300.0
+```
+
+### Python [:arrow_forward:](https://pythontutor.com/visualize.html#code=class%20Expr%3A%0A%20%20%20%20def%20__init__%28self,%20left,%20op,%20right%29%3A%0A%20%20%20%20%20%20%20%20self.left%20%3D%20left%0A%20%20%20%20%20%20%20%20self.op%20%3D%20op%0A%20%20%20%20%20%20%20%20self.right%20%3D%20right%0A%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20return%20f%22%28%7Bself.left%7D%20%7Bself.op%7D%20%7Bself.right%7D%29%22%0A%0Adef%20evaluate%28expr%29%3A%0A%20%20%20%20if%20isinstance%28expr,%20Expr%29%3A%0A%20%20%20%20%20%20%20%20left_val%20%3D%20evaluate%28expr.left%29%0A%20%20%20%20%20%20%20%20right_val%20%3D%20evaluate%28expr.right%29%0A%20%20%20%20%20%20%20%20if%20expr.op%20%3D%3D%20%22%2B%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20left_val%20%2B%20right_val%0A%20%20%20%20%20%20%20%20elif%20expr.op%20%3D%3D%20%22-%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20left_val%20-%20right_val%0A%20%20%20%20%20%20%20%20elif%20expr.op%20%3D%3D%20%22*%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20left_val%20*%20right_val%0A%20%20%20%20%20%20%20%20elif%20expr.op%20%3D%3D%20%22/%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20left_val%20/%20right_val%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20expr%0A%0A%23%20%2810%20%2B%2020%29%20*%20%2830%20-%20%2840%20/%202%29%29%0Aexpr%20%3D%20Expr%28Expr%2810,%20%22%2B%22,%2020%29,%20%22*%22,%20Expr%2830,%20%22-%22,%20Expr%2840,%20%22/%22,%202%29%29%29%0A%0Aprint%28expr,%20%22%3D%22,%20evaluate%28expr%29%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```python
+from typing import TypeVar
+
+TExpr = TypeVar("TExpr", bound="Expr")
+
+class Expr:
+    def __init__(self, left: TExpr | int | float, op: str, right: TExpr | int | float):
+        self.left = left
+        self.op = op
+        self.right = right
+
+    def __str__(self):
+        return f"({self.left} {self.op} {self.right})"
+
+def evaluate(expr: TExpr | int | float) -> float:
+    if isinstance(expr, Expr):
+        left_val = evaluate(expr.left)
+        right_val = evaluate(expr.right)
+        match expr.op:
+            case "+":
+                return left_val + right_val
+            case "-":
+                return left_val - right_val
+            case "*":
+                return left_val * right_val
+            case "/":
+                return left_val / right_val
+    else:
+        return expr
+
+# (10 + 20) * (30 - (40 / 2))
+expr = Expr(Expr(10, "+", 20), "*", Expr(30, "-", Expr(40, "/", 2)))
+
+print(expr, "=", evaluate(expr))
+```
+
+### Java [:arrow_forward:](https://pythontutor.com/visualize.html#code=public%20class%20Main%20%7B%0A%20%20%20%20public%20static%20void%20main%28String%5B%5D%20args%29%20%7B%0A%20%20%20%20%20%20%20%20Expression%20expr%20%3D%20new%20OperationNode%28%0A%20%20%20%20%20%20%20%20%20%20%20%20new%20OperationNode%28new%20ValueNode%2810%29,%20%22%2B%22,%20new%20ValueNode%2820%29%29,%0A%20%20%20%20%20%20%20%20%20%20%20%20%22*%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20new%20OperationNode%28%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20new%20ValueNode%2830%29,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22-%22,%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20new%20OperationNode%28new%20ValueNode%2840%29,%20%22/%22,%20new%20ValueNode%282%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%29%0A%20%20%20%20%20%20%20%20%29%3B%0A%20%20%20%20%20%20%20%20System.out.println%28expr%20%2B%20%22%20%3D%20%22%20%2B%20evaluate%28expr%29%29%3B%0A%20%20%20%20%7D%0A%0A%20%20%20%20public%20static%20double%20evaluate%28Expression%20expr%29%20%7B%0A%20%20%20%20%20%20%20%20if%20%28expr%20instanceof%20ValueNode%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20%28%28ValueNode%29%20expr%29.value%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20OperationNode%20opNode%20%3D%20%28OperationNode%29%20expr%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20Double%20leftVal%20%3D%20evaluate%28opNode.left%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20Double%20rightVal%20%3D%20evaluate%28opNode.right%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20switch%20%28opNode.op%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%22%2B%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20leftVal%20%2B%20rightVal%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%22-%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20leftVal%20-%20rightVal%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%22*%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20leftVal%20*%20rightVal%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20case%20%22/%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20leftVal%20/%20rightVal%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20default%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20throw%20new%20IllegalArgumentException%28%22Unsupported%20operator%3A%20%22%20%2B%20opNode.op%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20public%20interface%20Expression%20%7B%0A%20%20%20%20%7D%0A%0A%20%20%20%20public%20static%20class%20ValueNode%20implements%20Expression%20%7B%0A%20%20%20%20%20%20%20%20public%20final%20Double%20value%3B%0A%0A%20%20%20%20%20%20%20%20public%20ValueNode%28Double%20value%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20this.value%20%3D%20value%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20public%20ValueNode%28Integer%20value%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20this.value%20%3D%20value.doubleValue%28%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20public%20String%20toString%28%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20value.toString%28%29%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%0A%20%20%20%20public%20static%20class%20OperationNode%20implements%20Expression%20%7B%0A%20%20%20%20%20%20%20%20public%20final%20Expression%20left%3B%0A%20%20%20%20%20%20%20%20public%20final%20String%20op%3B%0A%20%20%20%20%20%20%20%20public%20final%20Expression%20right%3B%0A%0A%20%20%20%20%20%20%20%20public%20OperationNode%28Expression%20left,%20String%20op,%20Expression%20right%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20this.left%20%3D%20left%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20this.op%20%3D%20op%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20this.right%20%3D%20right%3B%0A%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20public%20String%20toString%28%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20%22%28%22%20%2B%20left%20%2B%20%22%20%22%20%2B%20op%20%2B%20%22%20%22%20%2B%20right%20%2B%20%22%29%22%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%7D&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=java&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Expression expr = new OperationNode(
+            new OperationNode(new ValueNode(10), "+", new ValueNode(20)),
+            "*",
+            new OperationNode(
+                new ValueNode(30),
+                "-",
+                new OperationNode(new ValueNode(40), "/", new ValueNode(2))
+            )
+        );
+        System.out.println(expr + " = " + evaluate(expr));
+    }
+
+    public static double evaluate(Expression expr) {
+        if (expr instanceof ValueNode) {
+            return ((ValueNode) expr).value;
+        } else {
+            OperationNode opNode = (OperationNode) expr;
+            Double leftVal = evaluate(opNode.left);
+            Double rightVal = evaluate(opNode.right);
+            switch (opNode.op) {
+                case "+":
+                    return leftVal + rightVal;
+                case "-":
+                    return leftVal - rightVal;
+                case "*":
+                    return leftVal * rightVal;
+                case "/":
+                    return leftVal / rightVal;
+                default:
+                    throw new IllegalArgumentException("Unsupported operator: " + opNode.op);
+            }
+        }
+    }
+
+    public interface Expression {
+    }
+
+    public static class ValueNode implements Expression {
+        public final Double value;
+
+        public ValueNode(Double value) {
+            this.value = value;
+        }
+
+        public ValueNode(Integer value) {
+            this.value = value.doubleValue();
+        }
+
+        @Override
+        public String toString() {
+            return value.toString();
+        }
+    }
+
+    public static class OperationNode implements Expression {
+        public final Expression left;
+        public final String op;
+        public final Expression right;
+
+        public OperationNode(Expression left, String op, Expression right) {
+            this.left = left;
+            this.op = op;
+            this.right = right;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + left + " " + op + " " + right + ")";
         }
     }
 }
