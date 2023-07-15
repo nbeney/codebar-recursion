@@ -169,28 +169,28 @@ sequenceDiagram
     participant fib3 as fib
     participant fib4 as fib
 
-    main->+fib1: 4
-        fib1->+fib2: 2
-            fib2->+fib3: 0
-            fib3-->-fib2: 0
+    main->>+fib1: 4
+        fib1->>+fib2: 2
+            fib2->>+fib3: 0
+            fib3-->>-fib2: 0
 
-            fib2->+fib3: 1
-            fib3-->-fib2: 1
-        fib2-->-fib1: 1 = 0 + 1
+            fib2->>+fib3: 1
+            fib3-->>-fib2: 1
+        fib2-->>-fib1: 1 = 0 + 1
 
-        fib1->+fib2: 3
-            fib2->+fib3: 1
-            fib3-->-fib2: 1
+        fib1->>+fib2: 3
+            fib2->>+fib3: 1
+            fib3-->>-fib2: 1
 
-            fib2->+fib3: 2
-                fib3->+fib4: 0
-                fib4-->-fib3: 0
+            fib2->>+fib3: 2
+                fib3->>+fib4: 0
+                fib4-->>-fib3: 0
 
-                fib3->+fib4: 1
-                fib4-->-fib3: 1
-            fib3-->-fib2: 1 = 0 + 1
-        fib2-->-fib1: 2 = 1 + 1
-    fib1-->-main: 3 = 1 + 2
+                fib3->>+fib4: 1
+                fib4-->>-fib3: 1
+            fib3-->>-fib2: 1 = 0 + 1
+        fib2-->>-fib1: 2 = 1 + 1
+    fib1-->>-main: 3 = 1 + 2
 ```
 
 ### Python [:arrow_forward:](https://pythontutor.com/visualize.html#code=def%20fib%28n%3A%20int%29%20-%3E%20int%3A%0A%20%20%20%20if%20n%20%3C%202%3A%0A%20%20%20%20%20%20%20%20return%20n%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20fib%28n%20-%202%29%20%2B%20fib%28n%20-%201%29%0A%0Aprint%28fib%284%29%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false)
@@ -232,12 +232,12 @@ sequenceDiagram
     participant longest2 as longest
     participant longest3 as longest
 
-    main->+longest1: ["red", "green", "blue"]
-    longest1->+longest2: ["green", "blue"]
-    longest2->+longest3: ["blue"]
-    longest3-->-longest2: "blue"
-    longest2-->-longest1: "green" because "green" is longer than "blue"
-    longest1-->-main: "green" because "red" is not longer than "green"
+    main->>+longest1: ["red", "green", "blue"]
+    longest1->>+longest2: ["green", "blue"]
+    longest2->>+longest3: ["blue"]
+    longest3-->>-longest2: "blue"
+    longest2-->>-longest1: "green" because "green" is longer than "blue"
+    longest1-->>-main: "green" because "red" is not longer than "green"
 ```
 
 ### Python [:arrow_forward:](https://pythontutor.com/visualize.html#code=def%20longest%28words%3A%20list%29%20-%3E%20str%3A%0A%20%20%20%20if%20len%28words%29%20%3D%3D%201%3A%0A%20%20%20%20%20%20%20%20return%20words%5B0%5D%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20longest_of_rest%20%3D%20longest%28words%5B1%3A%5D%29%0A%20%20%20%20%20%20%20%20if%20len%28words%5B0%5D%29%20%3E%20len%28longest_of_rest%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20words%5B0%5D%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20longest_of_rest%0A%0Aprint%28longest%28%5B%22red%22,%20%22green%22,%20%22blue%22%5D%29%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false)
