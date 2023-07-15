@@ -414,6 +414,7 @@ print(expr, "=", evaluate(expr))
 ```java
 public class Main {
     public static void main(String[] args) {
+        // (10 + 20) * (30 - (40 / 2))
         Expression expr = new OperationNode(
             new OperationNode(new ValueNode(10), "+", new ValueNode(20)),
             "*",
