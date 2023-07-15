@@ -51,3 +51,54 @@ public class Factorial {
   }
 }
 ```
+
+## Reverse
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant reverse4 as reverse
+    participant reverse3 as reverse
+    participant reverse2 as reverse
+    participant reverse1 as reverse
+
+    main->>+reverse4: "STEP"
+        reverse4->>+reverse3: "STE"
+            reverse3->>+reverse2: "ST"
+                reverse2->>+reverse1: "S"
+                reverse1-->>-reverse2: "S"
+            reverse2->>-reverse3: "TS" = "T" + "S"
+        reverse3-->>-reverse4: "ETS" = "E" + "TS"
+    reverse4-->>-main: "PETS" = "P" + "ETS"
+```
+
+### Python
+
+```python
+def reverse(text: str) -> str:
+  if len(text) <= 1:
+    return text
+  else:
+    return text[-1] + reverse(text[0:-1])
+
+print(reverse("STEP"))
+```
+
+### Java
+
+```java
+public class Reverse {
+  public static void main(String[] args) {
+    System.out.println(reverse("STEP"));
+  }
+
+  public static String reverse(String text) {
+    int len = text.length();
+    if (len <= 1) {
+      return text;
+    } else {
+      return text.charAt(len - 1) + reverse(text.substring(0, len - 1));
+    }
+  }
+}
+```
