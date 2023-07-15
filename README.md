@@ -1,5 +1,10 @@
 # codebar-recursion
 
+* [Factorial](#factorial)
+* [Reverse](#reverse)
+* [Convert](#convert)
+* [Fibonacci](#fibonacci)
+
 ## Factorial
 
 ```mermaid
