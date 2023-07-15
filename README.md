@@ -153,3 +153,66 @@ public class Convert {
 }
 ```
 
+## Fibonacci
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant fib1 as fib
+    participant fib2 as fib
+    participant fib3 as fib
+    participant fib4 as fib
+
+    main->+fib1: 4
+        fib1->+fib2: 2
+            fib2->+fib3: 0
+            fib3-->-fib2: 0
+
+            fib2->+fib3: 1
+            fib3-->-fib2: 1
+        fib2-->-fib1: 1 = 0 + 1
+
+        fib1->+fib2: 3
+            fib2->+fib3: 1
+            fib3-->-fib2: 1
+
+            fib2->+fib3: 2
+                fib3->+fib4: 0
+                fib4-->-fib3: 0
+
+                fib3->+fib4: 1
+                fib4-->-fib3: 1
+            fib3-->-fib2: 1 = 0 + 1
+        fib2-->-fib1: 2 = 1 + 1
+    fib1-->-main: 3 = 1 + 2
+```
+
+### Python
+
+```python
+def fib(n: int) -> int:
+    if n < 2:
+        return n
+    else:
+        return fib(n - 2) + fib(n - 1)
+
+print(fib(4))
+```
+
+### Java
+
+```java
+public class Fibonacci {
+  public static void main(String[] args) {
+    System.out.println(fib(4));
+  }
+
+  public static int fib(int n) {
+    if (n < 2) {
+      return n;
+    } else {
+      return fib(n - 2) + fib(n - 1);
+    }
+  }
+}
+```
