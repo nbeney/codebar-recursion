@@ -420,6 +420,15 @@ public class Main {
 ## Expression
 
 ```mermaid
+flowchart TD
+    %% (10 + 20) * (30 - (40 / 2))
+    A(("*")) --- B(("+")) & C(("-"))
+    B --- D[10] & E[20]
+    C --- F[30] & G(("/"))
+    G --- H[40] & I[2]
+```
+
+```mermaid
 sequenceDiagram
     participant main
     participant evaluate1 as evaluate
