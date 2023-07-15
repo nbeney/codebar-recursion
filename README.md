@@ -73,7 +73,7 @@ function drawCircle(x, radius, level) {
   // a certain value (here, 1). If a terminating condition is not 
   // specified, a recursive function keeps calling itself again and again
   // until it runs out of stack space - not a favourable outcome! 
-  fill(palette[4 - level]);
+  fill(palette[max(0, 4 - level)]);
   ellipse(x, height / 2, radius * 2, radius * 2);
   if (level > 1) {  
     // 'level' decreases by 1 at every step and thus makes the terminating condition
