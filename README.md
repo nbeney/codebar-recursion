@@ -54,7 +54,7 @@ sequenceDiagram
     drawCircle1-->>-main: 
 ```
 
-### Javascript (p5.js) [:arrow_forward:](https://editor.p5js.org/nicben/sketches/4YIlLS4FT)
+### Javascript ([p5.js](https://p5js.org/)) [:arrow_forward:](https://editor.p5js.org/nicben/sketches/4YIlLS4FT)
 
 ```javascript
 let palette = ["#216869", "#49A078", "#9CC5A1", "#DCE1DE"];
