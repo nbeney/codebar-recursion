@@ -1,6 +1,7 @@
 # codebar-recursion
 
-* [Graphics](#graphics)
+* [Circles](#circles)
+* [Lines](#lines)
 * [Factorial](#factorial)
 * [Reverse](#reverse)
 * [Convert](#convert)
@@ -10,7 +11,7 @@
 * [Expression](#expression)
 * [Quicksort](#quicksort)
 
-## Graphics
+## Circles
 
 <img src="./circles-seq.png" alt="Circles" width="800" height="250"/>
 
@@ -88,6 +89,88 @@ function drawCircle(x, radius, level, depth) {
     // attainable
     drawCircle(x - radius / 2, radius / 2, level - 1, depth + 1);
     drawCircle(x + radius / 2, radius / 2, level - 1, depth + 1);
+  }
+}
+```
+
+## Lines
+
+<img src="./lines-seq.png" alt="Lines" width="800" height="250"/>
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant drawCircle1 as drawCircle
+    participant drawCircle2 as drawCircle
+    participant drawCircle3 as drawCircle
+    participant drawCircle4 as drawCircle
+
+    main->>+drawCircle1: x=200, radius=200, level= 4
+    drawCircle1->>+drawCircle2: x=100.0, radius=100.0, level=3
+    drawCircle2->>+drawCircle3: x=50.0, radius=50.0, level=2
+    drawCircle3->>+drawCircle4: x=25.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3->>+drawCircle4: x=75.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3-->>-drawCircle2: 
+    drawCircle2->>+drawCircle3: x=150.0, radius=50.0, level=2
+    drawCircle3->>+drawCircle4: x=125.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3->>+drawCircle4: x=175.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3-->>-drawCircle2: 
+    drawCircle2-->>-drawCircle1: 
+    drawCircle1->>+drawCircle2: x=300.0, radius=100.0, level=3
+    drawCircle2->>+drawCircle3: x=250.0, radius=50.0, level=2
+    drawCircle3->>+drawCircle4: x=225.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3->>+drawCircle4: x=275.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3-->>-drawCircle2: 
+    drawCircle2->>+drawCircle3: x=350.0, radius=50.0, level=2
+    drawCircle3->>+drawCircle4: x=325.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3->>+drawCircle4: x=375.0, radius=25.0, level=1
+    drawCircle4-->>-drawCircle3: 
+    drawCircle3-->>-drawCircle2: 
+    drawCircle2-->>-drawCircle1: 
+    drawCircle1-->>-main: 
+```
+
+### Javascript ([p5.js](https://p5js.org/)) [:arrow_forward:](https://editor.p5js.org/nicben/sketches/OkPyavaqN)
+
+```javascript
+const N = 6;
+
+function setup() {
+  createCanvas(800, 250);
+  noLoop();
+}
+
+function draw() {
+  background(230);
+  for (let n = 1; n <= N; n++) {
+    const gap = 20;
+    const thickness = (height - (N + 1) * gap) / N;
+    const y = gap + thickness / 2 + (n - 1) * (gap + thickness);
+    drawLine(width / 2, y, width - 2 * gap, thickness, n);
+  }
+}
+
+function drawLine(x, y, length, thickness, level) {
+  // 'level' is the variable that terminates the recursion once it reaches
+  // a certain value (here, 1). If a terminating condition is not
+  // specified, a recursive function keeps calling itself again and again
+  // until it runs out of stack space - not a favourable outcome!
+  if (level === 1) {
+    fill(0);
+    rectMode(CENTER);
+    rect(x, y, length, thickness);
+  } else {
+    // 'level' decreases by 1 at every step and thus makes the terminating
+    // condition attainable.
+    drawLine(x - length / 3, y, length / 3, thickness, level - 1);
+    drawLine(x + length / 3, y, length / 3, thickness, level - 1);
   }
 }
 ```
