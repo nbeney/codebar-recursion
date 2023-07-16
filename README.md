@@ -12,7 +12,7 @@
 
 ## Graphics
 
-<img src="./circles.png" alt="Circles" width="200" height="200"/>
+<img src="./circles-seq.png" alt="Circles" width="800" height="250"/>
 
 ```mermaid
 sequenceDiagram
@@ -57,29 +57,37 @@ sequenceDiagram
 ### Javascript ([p5.js](https://p5js.org/)) [:arrow_forward:](https://editor.p5js.org/nicben/sketches/4YIlLS4FT)
 
 ```javascript
-let palette = ["#216869", "#49A078", "#9CC5A1", "#DCE1DE"];
+const N = 4;
+const palette = ["#216869", "#49A078", "#9CC5A1", "#DCE1DE"];
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 250);
   noLoop();
 }
 
 function draw() {
-  drawCircle(width / 2, height / 2 - 5, 4);
+  background(220);
+  const diameter = width / N;
+  const radius = diameter / 2;
+  const gap = 10;
+  for (let n = 1; n <= N; n++) {
+    const x = radius + (n - 1) * diameter;
+    drawCircle(x, radius - gap, n, 0);
+  }
 }
 
-function drawCircle(x, radius, level) {
-  // 'level' is the variable that terminates the recursion once it reaches 
-  // a certain value (here, 1). If a terminating condition is not 
+function drawCircle(x, radius, level, depth) {
+  // 'level' is the variable that terminates the recursion once it reaches
+  // a certain value (here, 1). If a terminating condition is not
   // specified, a recursive function keeps calling itself again and again
-  // until it runs out of stack space - not a favourable outcome! 
-  fill(palette[(level - 1) % palette.length]);
+  // until it runs out of stack space - not a favourable outcome!
+  fill(palette[depth % palette.length]);
   ellipse(x, height / 2, radius * 2, radius * 2);
-  if (level > 1) {  
+  if (level > 1) {
     // 'level' decreases by 1 at every step and thus makes the terminating condition
     // attainable
-    drawCircle(x - radius / 2, radius / 2, level - 1);
-    drawCircle(x + radius / 2, radius / 2, level - 1);
+    drawCircle(x - radius / 2, radius / 2, level - 1, depth + 1);
+    drawCircle(x + radius / 2, radius / 2, level - 1, depth + 1);
   }
 }
 ```
