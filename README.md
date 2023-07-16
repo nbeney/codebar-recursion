@@ -85,8 +85,8 @@ function drawCircle(x, radius, level, depth) {
   fill(palette[depth % palette.length]);
   ellipse(x, height / 2, radius * 2, radius * 2);
   if (level > 1) {
-    // 'level' decreases by 1 at every step and thus makes the terminating condition
-    // attainable
+    // 'level' decreases by 1 at every step and thus makes the terminating
+    // condition attainable.
     drawCircle(x - radius / 2, radius / 2, level - 1, depth + 1);
     drawCircle(x + radius / 2, radius / 2, level - 1, depth + 1);
   }
