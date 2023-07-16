@@ -100,41 +100,41 @@ function drawCircle(x, radius, level, depth) {
 ```mermaid
 sequenceDiagram
     participant main
-    participant drawCircle1 as drawCircle
-    participant drawCircle2 as drawCircle
-    participant drawCircle3 as drawCircle
-    participant drawCircle4 as drawCircle
-
-    main->>+drawCircle1: x=200, radius=200, level= 4
-    drawCircle1->>+drawCircle2: x=100.0, radius=100.0, level=3
-    drawCircle2->>+drawCircle3: x=50.0, radius=50.0, level=2
-    drawCircle3->>+drawCircle4: x=25.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3->>+drawCircle4: x=75.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3-->>-drawCircle2: 
-    drawCircle2->>+drawCircle3: x=150.0, radius=50.0, level=2
-    drawCircle3->>+drawCircle4: x=125.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3->>+drawCircle4: x=175.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3-->>-drawCircle2: 
-    drawCircle2-->>-drawCircle1: 
-    drawCircle1->>+drawCircle2: x=300.0, radius=100.0, level=3
-    drawCircle2->>+drawCircle3: x=250.0, radius=50.0, level=2
-    drawCircle3->>+drawCircle4: x=225.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3->>+drawCircle4: x=275.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3-->>-drawCircle2: 
-    drawCircle2->>+drawCircle3: x=350.0, radius=50.0, level=2
-    drawCircle3->>+drawCircle4: x=325.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3->>+drawCircle4: x=375.0, radius=25.0, level=1
-    drawCircle4-->>-drawCircle3: 
-    drawCircle3-->>-drawCircle2: 
-    drawCircle2-->>-drawCircle1: 
-    drawCircle1-->>-main: 
+    participant drawLine1 as drawLine
+    participant drawLine2 as drawLine
+    participant drawLine3 as drawLine
+    participant drawLine4 as drawLine
+        
+    main->>+drawLine1: x=135, length=270, level=4
+    drawLine1->>+drawLine2: x=45, length=90, level=3
+    drawLine2->>+drawLine3: x=15, length=30, level=2
+    drawLine3->>+drawLine4: x=5, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3->>+drawLine4: x=25, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3-->>+drawLine2: 
+    drawLine2->>+drawLine3: x=75, length=30, level=2
+    drawLine3->>+drawLine4: x=65, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3->>+drawLine4: x=85, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3-->>+drawLine2: 
+    drawLine2-->>+drawLine1: 
+    drawLine1->>+drawLine2: x=225, length=90, level=3
+    drawLine2->>+drawLine3: x=195, length=30, level=2
+    drawLine3->>+drawLine4: x=185, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3->>+drawLine4: x=205, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3-->>+drawLine2: 
+    drawLine2->>+drawLine3: x=255, length=30, level=2
+    drawLine3->>+drawLine4: x=245, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3->>+drawLine4: x=265, length=10, level=1
+    drawLine4-->>+drawLine3: 
+    drawLine3-->>+drawLine2: 
+    drawLine2-->>+drawLine1: 
+    drawLine1-->>+main: 
 ```
 
 ### Javascript ([p5.js](https://p5js.org/)) [:arrow_forward:](https://editor.p5js.org/nicben/sketches/OkPyavaqN)
