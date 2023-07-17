@@ -144,6 +144,9 @@ const N = 6;
 
 function setup() {
   createCanvas(800, 250);
+  rectMode(CENTER);
+  fill(0);
+  noStroke();
   noLoop();
 }
 
@@ -163,8 +166,6 @@ function drawLine(x, y, length, thickness, level) {
   // specified, a recursive function keeps calling itself again and again
   // until it runs out of stack space - not a favourable outcome!
   if (level === 1) {
-    fill(0);
-    rectMode(CENTER);
     rect(x, y, length, thickness);
   } else {
     // 'level' decreases by 1 at every step and thus makes the terminating
