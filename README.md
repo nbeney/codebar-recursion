@@ -1,5 +1,6 @@
 # codebar-recursion
 
+* [Introduction](#introduction)
 * [Example 1: Circles](#example-1-circles)
 * [Example 2: Lines](#example-2-lines)
 * [Example 3: Factorial](#example-3-factorial)
@@ -11,6 +12,10 @@
 * [Example 9: Expression](#example-9-expression)
 * [Example :10 Quicksort](#example-10-quicksort)
 * [Example :11 Even-Odd](#example-11-even-odd)
+
+## Introduction
+
+<img src="./factorial.gif" alt="Factorial"/>
 
 ## Example 1: Circles
 
