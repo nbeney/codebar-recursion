@@ -1,17 +1,17 @@
 # codebar-recursion
 
-* [Circles](#circles)
-* [Lines](#lines)
-* [Factorial](#factorial)
-* [Reverse](#reverse)
-* [Convert](#convert)
-* [Fibonacci](#fibonacci)
-* [Longest](#longest)
-* [Sum](#sum)
-* [Expression](#expression)
-* [Quicksort](#quicksort)
+* [Example 1: Circles](#example-1-circles)
+* [Example 2: Lines](#example-2-lines)
+* [Example 3: Factorial](#example-3-factorial)
+* [Example 4: Reverse](#example-4-reverse)
+* [Example 5: Convert](#example-5-convert)
+* [Example 6: Fibonacci](#example-6-fibonacci)
+* [Example 7: Longest](#example-7-longest)
+* [Example 8: Sum](#example-8-sum)
+* [Example 9: Expression](#example-9-expression)
+* [Example :10 Quicksort](#example-10-quicksort)
 
-## Circles
+## Example 1: Circles
 
 <img src="./circles-seq.png" alt="Circles" width="800" height="250"/>
 
@@ -93,7 +93,7 @@ function drawCircle(x, radius, level, depth) {
 }
 ```
 
-## Lines
+## Example 2: Lines
 
 <img src="./lines-seq.png" alt="Lines" width="800" height="250"/>
 
@@ -176,7 +176,7 @@ function drawLine(x, y, length, thickness, level) {
 }
 ```
 
-## Factorial
+## Example 3: Factorial
 
 ```mermaid
 sequenceDiagram
@@ -228,7 +228,7 @@ public class Factorial {
 }
 ```
 
-## Reverse
+## Example 4: Reverse
 
 ```mermaid
 sequenceDiagram
@@ -279,7 +279,7 @@ public class Reverse {
 }
 ```
 
-## Convert
+## Example 5: Convert
 
 ```mermaid
 sequenceDiagram
@@ -329,7 +329,7 @@ public class Convert {
 }
 ```
 
-## Fibonacci
+## Example 6: Fibonacci
 
 ```mermaid
 sequenceDiagram
@@ -393,7 +393,7 @@ public class Fibonacci {
 }
 ```
 
-## Longest
+## Example 7: Longest
 
 ```mermaid
 sequenceDiagram
@@ -452,7 +452,7 @@ public class Longest {
 }
 ```
 
-## Sum
+## Example 8: Sum
 
 ```mermaid
 sequenceDiagram
@@ -509,7 +509,7 @@ public class Main {
 }
 ```
 
-## Expression
+## Example 9: Expression
 
 ```mermaid
 flowchart TD
@@ -665,7 +665,7 @@ public class Main {
 }
 ```
 
-## Quicksort
+## Example 10: Quicksort
 
 ```mermaid
 sequenceDiagram
