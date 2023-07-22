@@ -10,6 +10,7 @@
 * [Example 8: Sum](#example-8-sum)
 * [Example 9: Expression](#example-9-expression)
 * [Example :10 Quicksort](#example-10-quicksort)
+* [Example :11 Even-Odd](#example-11-even-odd)
 
 ## Example 1: Circles
 
@@ -811,4 +812,66 @@ public class Main {
         }
     }
 }
+```
+
+## Example 11: Even-Odd
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant is_even1 as is_even
+    participant is_odd2 as is_odd
+    participant is_even3 as is_even
+    participant is_odd4 as is_odd
+    participant is_even5 as is_even
+            
+    main->>+is_even1: 4
+        is_even1->>+is_odd2: 3
+            is_odd2->>+is_even3: 2
+                is_even3->>+is_odd4: 1
+                    is_odd4->>+is_even5: 0
+                    is_even5-->>-is_odd4: True
+                is_odd4-->>-is_even3: True
+            is_even3-->>-is_odd2: True
+        is_odd2-->>-is_even1: True
+    is_even1-->>-main: True
+```
+
+```mermaid
+sequenceDiagram
+    participant main
+    participant is_odd1 as is_odd
+    participant is_even2 as is_even
+    participant is_odd3 as is_odd
+    participant is_even4 as is_even
+            
+    main->>+is_odd1: 4
+        is_odd1->>+is_even2: 3
+            is_even2->>+is_odd3: 2
+                is_odd3->>+is_even4: 1
+                    is_even4->>+is_odd5: 0
+                    is_odd5-->>-is_even4: False
+                is_even4-->>-is_odd3: False
+            is_odd3-->>-is_even2: False
+        is_even2-->>-is_odd1: False
+    is_odd1-->>-main: False
+```
+
+### Python [:arrow_forward:](https://pythontutor.com/visualize.html#code=def%20is_even%28n%3A%20int%29%20-%3E%20bool%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%20True%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20is_odd%28n%20-%201%29%0A%0Adef%20is_odd%28n%3A%20int%29%20-%3E%20bool%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%20False%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20is_even%28n%20-%201%29%0A%0Aprint%28is_even%284%29%29%0Aprint%28is_odd%284%29%29&cumulative=false&heapPrimitives=nevernest&mode=edit&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false)
+
+```python
+def is_even(n: int) -> bool:
+    if n == 0:
+        return True
+    else:
+        return is_odd(n - 1)
+
+def is_odd(n: int) -> bool:
+    if n == 0:
+        return False
+    else:
+        return is_even(n - 1)
+
+print(is_even(4))
+print(is_odd(4))
 ```
