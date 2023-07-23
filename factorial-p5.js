@@ -1,4 +1,4 @@
-const MAX_FRAMES = 6;
+const MAX_FRAMES = 7;
 const FRAME_WIDTH = 250;
 const FRAME_HEIGHT = 50;
 const COMMENT_GAP = 15;
@@ -119,8 +119,8 @@ class Simulation {
 
   fact(n) {
     this.enter(`fact(${n})`);
-    if (n == 1) {
-      this.leave(`${n}`);
+    if (n == 0) {
+      this.leave(`${1}`);
       return 1;
     } else {
       const temp = this.fact(n - 1);
