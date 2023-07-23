@@ -16,6 +16,57 @@
 
 ## Introduction
 
+<table>
+<tr>
+<th>Python</th>
+<th>Java</th>
+<th>Javascript</th>
+</tr>
+<tr>
+<td>
+  
+```python
+def fact(n: int) -> int:
+    if n == 0:
+        # Base case
+        return 1
+    else:
+        # Recursive case
+        return n * fact(n - 1)
+```
+  
+</td>
+<td>
+
+```java
+int fact(int n) {
+    if (n == 0)
+        // Base case
+        return 1;
+    else
+        // Recursive case
+        return n * fact(n - 1);
+}
+```
+
+</td>
+<td>
+
+```javascript
+function fact(n) {
+    if (n == 0)
+        // Base case
+        return 1;
+    else
+        // Recursive case
+        return n * fact(n - 1);
+}
+```
+
+</td>
+</tr>
+</table>
+
 <img src="./factorial.gif" alt="Factorial animation"/>
 
 <img src="./factorial.png" alt="Factorial illustration"/>
