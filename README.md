@@ -16,7 +16,14 @@
 
 ## Introduction
 
-<img src="./factorial.gif" alt="Factorial"/>
+<img src="./factorial.gif" alt="Factorial animation"/>
+
+<img src="./factorial.png" alt="Factorial illustration"/>
+
+Resources:
+* https://www.enjoyalgorithms.com/blog/recursion-explained-how-recursion-works-in-programming
+* https://webcache.googleusercontent.com/search?q=cache:http://realpython.com/python-recursion/
+* https://webcache.googleusercontent.com/search?q=cache:http://realpython.com/python-thinking-recursively/
 
 ## Example 1: Circles
 
