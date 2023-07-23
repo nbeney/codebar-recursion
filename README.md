@@ -10,8 +10,9 @@
 * [Example 7: Longest](#example-7-longest)
 * [Example 8: Sum](#example-8-sum)
 * [Example 9: Expression](#example-9-expression)
-* [Example :10 Quicksort](#example-10-quicksort)
-* [Example :11 Even-Odd](#example-11-even-odd)
+* [Example 10: Quicksort](#example-10-quicksort)
+* [Example 11: Even-Odd](#example-11-even-odd)
+* [Example 12: Cryptarithmetic Puzzles](#example-12-cryptarithmetic-puzzles)
 
 ## Introduction
 
@@ -880,4 +881,73 @@ def is_odd(n: int) -> bool:
 
 print(is_even(4))
 print(is_odd(4))
+```
+
+## Example 12: Cryptarithmetic Puzzles
+
+```
+EAT + THAT == APPLE
+819 + 9219 == 10038 : A=1 E=8 H=2 L=3 P=0 T=9
+
+SEND + MORE == MONEY
+9567 + 1085 == 10652 : D=7 E=5 M=1 N=6 O=0 R=8 S=9 Y=2
+
+BANANA + GUAVA == ORANGE
+249494 + 65474 == 314968 : A=4 B=2 E=8 G=6 N=9 O=3 R=1 U=5 V=7
+```
+
+### Python
+
+```python
+import re
+from itertools import chain
+
+def check_solution(
+    puzzle_letters: str,  # eg "EAT + THAT == APPLE"
+    solution: dict[str, str]  # eg {"A": "1", "E": "8", "H": "2", "L": "3", "P": "0", "T": "9"}
+):
+    letters_to_digits_table = {ord(letter): ord(digit) for letter, digit in solution.items()}
+    puzzle_digits = puzzle_letters.translate(letters_to_digits_table)
+    if eval(puzzle_digits):
+        pretty = " ".join(
+            f"{letter}={digit}"
+            for letter, digit
+            in sorted(solution.items())
+        )
+        print(f"{puzzle_digits} : {pretty}")
+
+def solve_puzzle(
+    puzzle: str,  # eg "EAT + THAT == APPLE"
+    letters: list[str],  # eg "HLPT"
+    digits: set[str],  # eg {"0", "2", "3", "4", "5", "6", "7", "9"}
+    non_zero_letters: set[str],  # eg {"E", "T", "A"}
+    solution: dict[str, str] = {}  # eg {"A": "1", "E": "8"}
+):
+    if len(letters) == 0:
+        check_solution(puzzle, solution)
+    else:
+        first_letter = letters[0]
+        other_letters = letters[1:]
+        for digit in digits:
+            if digit == "0" and first_letter in non_zero_letters:
+                continue
+            other_digits = digits.difference([digit])
+            new_solution = solution | {first_letter: digit}
+            solve_puzzle(puzzle, other_letters, other_digits, non_zero_letters, new_solution)
+
+def run(
+    puzzle: str  # eg "EAT + THAT == APPLE"
+):
+    words = re.findall(r'\w+', puzzle)
+    letters = sorted(list(set(chain(re.findall(r'\w', puzzle)))))
+    digits = set(list("0123456789"))
+    non_zero_letters = set(_[0] for _ in words)
+
+    print(puzzle)
+    solve_puzzle(puzzle, letters, digits, non_zero_letters)
+    print()
+
+run("EAT + THAT == APPLE")
+run("SEND + MORE == MONEY")
+run("BANANA + GUAVA == ORANGE")
 ```
