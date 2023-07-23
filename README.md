@@ -33,6 +33,9 @@ def fact(n: int) -> int:
     else:
         # Recursive case
         return n * fact(n - 1)
+
+# Main
+print(fact(5))
 ```
   
 </td>
@@ -47,6 +50,9 @@ int fact(int n) {
         // Recursive case
         return n * fact(n - 1);
 }
+
+// Main
+System.out.println(fact(5));
 ```
 
 </td>
@@ -61,6 +67,9 @@ function fact(n) {
         // Recursive case
         return n * fact(n - 1);
 }
+
+// Main
+console.log(fact(5));
 ```
 
 </td>
